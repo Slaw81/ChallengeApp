@@ -16,7 +16,10 @@ string surname = Console.ReadLine();
 
 
 //var employee = new Employee(name, surname);
-var supervisor = new Supervisor(name, surname);
+//var supervisor = new Supervisor(name, surname);
+var employee = new EmployeeInFile(name, surname);
+
+
 
 
 
@@ -33,8 +36,8 @@ while (true)
     }
     try
     {
-        //employee.AddGrade(input);
-        supervisor.AddGrade(input);
+        employee.AddGrade(input);
+        //supervisor.AddGrade(input);
     }
     catch (Exception e)
     {
@@ -43,12 +46,12 @@ while (true)
 }
 
 
-//var stats = employee.GetStats();
-var stats = supervisor.GetStats();
+var stats = employee.GetStats();
+//var stats = supervisor.GetStats();
 Console.WriteLine();
 Console.WriteLine();
-//Console.WriteLine($"..{employee.Name} {employee.Surname}");
-Console.WriteLine($"Kierownik:{supervisor.Name} {supervisor.Surname}");
+Console.WriteLine($"..{employee.Name} {employee.Surname}");
+//Console.WriteLine($"Kierownik:{supervisor.Name} {supervisor.Surname}");
 Console.WriteLine($"Average: {stats.Average:N2}");
 Console.WriteLine($"Min: {stats.Min}");
 Console.WriteLine($"Max: {stats.Max}");
