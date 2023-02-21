@@ -16,8 +16,7 @@ Console.WriteLine("Podaj Nazwisko");
 string surname = Console.ReadLine();
 
 
-//var employee = new Employee(name, surname);
-var employee = new EmployeeInMemory(name,surname);
+var employee = new EmployeeInFile(name,surname);
 employee.GradeAdded += EmployeeGradeAdded;
 
 void EmployeeGradeAdded(object sender, EventArgs args)
@@ -30,7 +29,6 @@ void EmployeeGradeAdded(object sender, EventArgs args)
 
 while (true)
 {
-    //Console.WriteLine("Aby zakończyć wpisz: wyjdz");
     Console.WriteLine("Podaj kolejną ocenę:_ lub wpisz wyjdz by zakonczyc");
 
     var input = Console.ReadLine();
@@ -41,7 +39,6 @@ while (true)
     try
     {
         employee.AddGrade(input);
-        //supervisor.AddGrade(input);
     }
     catch (Exception e)
     {
@@ -51,12 +48,11 @@ while (true)
 
 
 var stats = employee.GetStats();
-//var stats = supervisor.GetStats();
 Console.WriteLine();
 Console.WriteLine();
 Console.WriteLine($"{employee.Name} {employee.Surname}");
-//Console.WriteLine($"Kierownik:{supervisor.Name} {supervisor.Surname}");
-Console.WriteLine($"Average: {stats.Average:N2}");
+Console.WriteLine($"Ilość ocen:{stats.Count}");
 Console.WriteLine($"Min: {stats.Min}");
 Console.WriteLine($"Max: {stats.Max}");
+Console.WriteLine($"Average: {stats.Average:N2}");
 Console.WriteLine($"Final: {stats.AverageLetter}");
