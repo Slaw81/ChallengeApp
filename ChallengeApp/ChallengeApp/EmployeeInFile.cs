@@ -3,6 +3,9 @@
     public class EmployeeInFile : EmployeeBase
     {
         private const string fileName = "grades.txt";
+
+        public event GradeAddedDelegate GradeAdded;
+
         public EmployeeInFile(string name, string surname)
             : base(name, surname)
         {

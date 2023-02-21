@@ -1,5 +1,6 @@
 ﻿using ChallengeApp;
 
+
 Console.WriteLine("Witamy w Programie Ocena Pracownika");
 Console.WriteLine("===================================");
 Console.WriteLine("Skala ocen:");
@@ -16,12 +17,15 @@ string surname = Console.ReadLine();
 
 
 //var employee = new Employee(name, surname);
-//var supervisor = new Supervisor(name, surname);
-var employee = new EmployeeInFile(name, surname);
+var employee = new EmployeeInMemory(name,surname);
+employee.GradeAdded += EmployeeGradeAdded;
 
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nową ocenę");
+ }
 
-
-
+//employee.GradeAdded -= EmployeeGradeAdded;
 
 
 while (true)
@@ -50,7 +54,7 @@ var stats = employee.GetStats();
 //var stats = supervisor.GetStats();
 Console.WriteLine();
 Console.WriteLine();
-Console.WriteLine($"..{employee.Name} {employee.Surname}");
+Console.WriteLine($"{employee.Name} {employee.Surname}");
 //Console.WriteLine($"Kierownik:{supervisor.Name} {supervisor.Surname}");
 Console.WriteLine($"Average: {stats.Average:N2}");
 Console.WriteLine($"Min: {stats.Min}");

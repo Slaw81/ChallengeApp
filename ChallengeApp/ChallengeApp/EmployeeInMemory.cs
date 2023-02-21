@@ -2,13 +2,13 @@
 {
     internal class EmployeeInMemory : EmployeeBase
     {
+        public event GradeAddedDelegate GradeAdded;
+
         private List<float> grades = new List<float>();
         public EmployeeInMemory(string name, string surname) 
             : base(name, surname)
         {
-
         }
-
 
         public override void AddGrade(float grade)
         {
@@ -16,6 +16,10 @@
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
+                if(GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
 
             }
             else
@@ -28,15 +32,20 @@
         public override void AddGrade(string grade)
         {
             //parsowanie i konwersja na inny typ tu- string na float
-            if (float.TryParse(grade, out float result))
-            {
-                this.AddGrade(result);
-            }
-            else
-            {
-                throw new Exception("Wpisz wartość od 0 do 100");
-                //Console.WriteLine("String nie jest Float");
-            }
+
+                if (float.TryParse(grade, out float result))
+                {
+                    this.AddGrade(result);
+                }
+                else if (char.TryParse(grade, out char charcter))
+                {
+                    this.AddGrade(charcter);
+
+                }
+                else
+                {
+                    throw new Exception("Wpisz wartość od 0 do 100");
+                }
         }
 
         public override void AddGrade(double grade)
